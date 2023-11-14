@@ -7,6 +7,8 @@
 import './bootstrap';
 import { createApp } from 'vue';
 
+import store from "./store/store";
+
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
@@ -39,5 +41,4 @@ app.component('student-form-component', StudentFormComponent);
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
-// app.use(ElementUI);
-app.mount('#vue-app');
+app.use(store).mount('#vue-app');
