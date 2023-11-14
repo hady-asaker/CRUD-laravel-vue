@@ -10,7 +10,7 @@ import { createApp } from 'vue';
 import store from "./store/store";
 
 import ElementPlugin from 'element-plus';
-
+import 'element-plus/theme-chalk/index.css';
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready

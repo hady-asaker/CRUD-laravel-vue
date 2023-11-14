@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
+import VitePluginElementPlus from 'vite-plugin-element-plus';
 
 export default defineConfig({
     plugins: [
@@ -18,6 +19,9 @@ export default defineConfig({
                     includeAbsolute: false,
                 },
             },
+        }),
+        VitePluginElementPlus({
+            styleLibraryName: 'theme-chalk',
         }),
     ],
     resolve: {
