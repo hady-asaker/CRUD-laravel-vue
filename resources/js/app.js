@@ -9,6 +9,8 @@ import { createApp } from 'vue';
 
 import store from "./store/store";
 
+import ElementPlugin from 'element-plus';
+
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
@@ -41,4 +43,6 @@ app.component('student-form-component', StudentFormComponent);
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
-app.use(store).mount('#vue-app');
+app.use(store);
+app.use(ElementPlugin);
+app.mount('#vue-app');
