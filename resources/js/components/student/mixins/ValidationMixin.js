@@ -1,4 +1,3 @@
-
 const generateValidationRule = (fieldName, length) => [
     { required: true, message: `${fieldName} is required`, trigger: 'blur' },
     {
