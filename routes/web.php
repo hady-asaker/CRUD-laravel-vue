@@ -27,3 +27,5 @@ Route::get('/example', function () {
 });
 
 Route::get('/add-student', 'App\Http\Controllers\StudentController@create');
+Route::post('/save-student', 'App\Http\Controllers\StudentController@save');
+Route::get('/students', 'App\Http\Controllers\StudentController@All_Students');
