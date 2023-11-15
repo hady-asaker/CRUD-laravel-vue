@@ -12,20 +12,20 @@
             <div class="form-container">
                 <el-form :model="model" :rules="rules" ref="studentForm" class="full-form">
 
-                    <el-form-item label="Name" required prop="name" >
-                        <el-input v-model="model.name" aria-placeholder="Student Name" size="large"></el-input>
+                    <el-form-item label="Name" required prop="name" :rules="rules.name">
+                        <el-input v-model="model.name" aria-placeholder="Student Name" size="large" @update:modelValue="validateName"></el-input>
                     </el-form-item>
 
-                    <el-form-item label="Class" required prop="class">
-                        <el-input v-model="model.class" aria-placeholder="Student Class" size="large"></el-input>
+                    <el-form-item label="Class" required prop="class" :rules="rules.class">
+                        <el-input v-model="model.class" aria-placeholder="Student Class" size="large" @update:modelValue="validateClass"></el-input>
                     </el-form-item>
 
-                    <el-form-item label="Section" required prop="section">
-                        <el-input v-model="model.section" aria-placeholder="Student Section" size="large"></el-input>
+                    <el-form-item label="Section" required prop="section" :rules="rules.section">
+                        <el-input v-model="model.section" aria-placeholder="Student Section" size="large" @update:modelValue="validateSection"></el-input>
                     </el-form-item>
 
-                    <el-form-item label="Email" required prop="email">
-                        <el-input v-model="model.email" aria-placeholder="Student Email" size="large"></el-input>
+                    <el-form-item label="Email" required prop="email" :rules="rules.email">
+                        <el-input v-model="model.email" aria-placeholder="Student Email" size="large" @update:modelValue="validateEmail"></el-input>
                     </el-form-item>
 
                     <el-row>
@@ -41,6 +41,7 @@
 
 <script>
 let string;
+import ValidationMixin from './mixins/ValidationMixin';
 export default {
     name: "StudentFormComponent",
     props: {
@@ -55,9 +56,6 @@ export default {
                 class: null,
                 section: null,
             },
-            rules: {
-                'email': 'required|email|max:255',
-            }
         };
     },
     methods: {
@@ -75,7 +73,8 @@ export default {
     mounted() {
         console.log("Vue Mounted");
         console.log(this.$store);
-    }
+    },
+    mixins: [ValidationMixin],
 }
 </script>
 
