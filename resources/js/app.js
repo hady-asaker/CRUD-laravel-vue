@@ -11,6 +11,7 @@ import store from "./store/store";
 
 import ElementPlugin from 'element-plus';
 import 'element-plus/theme-chalk/index.css';
+
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
@@ -24,6 +25,9 @@ app.component('example-component', ExampleComponent);
 
 import StudentFormComponent from './components/student/StudentFormComponent.vue';
 app.component('student-form-component', StudentFormComponent);
+
+import StudentsTableComponents from "./components/student/StudentsTableComponents.vue";
+app.component('students-table-component', StudentsTableComponents);
 
 /**
  * The following block of code may be used to automatically register your
