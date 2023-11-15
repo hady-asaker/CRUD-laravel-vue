@@ -5,8 +5,6 @@ import * as getters from "./getters.js";
 import * as mutations from './mutations.js';
 import * as actions from './actions.js';
 
-const app = createApp();
-
 const store = createStore({
     modules: {},
     state: {},
@@ -15,6 +13,4 @@ const store = createStore({
     getters,
 });
 
-app.use(store);
-
-export default app;
+export default store;

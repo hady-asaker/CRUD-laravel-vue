@@ -40,8 +40,12 @@
 </template>
 
 <script>
+let string;
 export default {
     name: "StudentFormComponent",
+    props: {
+        scope: string,
+    },
     data(){
         return{
             model: {
@@ -52,7 +56,7 @@ export default {
                 section: null,
             },
             rules: {
-                //validate
+                'email': 'required|email|max:255',
             }
         };
     },
@@ -60,7 +64,7 @@ export default {
         saveForm(formName){
             this.$refs[formName].validate( (valid) => {
                 if (valid){
-                    this.$store.dispatch(saveStudent, this.model);
+                    this.$store.dispatch('saveStudent', this.model);
                 }
             });
         },
@@ -91,7 +95,6 @@ export default {
 }
 
 .form-container {
-    //height: 100%;
     flex: 1;
     display: flex;
     flex-direction: column;
