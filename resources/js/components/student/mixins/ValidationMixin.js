@@ -1,61 +1,49 @@
+
+const generateValidationRule = (fieldName, length) => [
+    { required: true, message: `${fieldName} is required`, trigger: 'blur' },
+    {
+        validator: (rule, value, callback) => {
+            if (value && value.length < length) {
+                callback(new Error(`${fieldName} must be at least ${length} characters`));
+            } else {
+                callback();
+            }
+        },
+        trigger: 'blur',
+    },
+];
+
+
 const ValidationMixin = {
     name: 'ValidationMixin',
     data(){
         return{
             rules: {
-                name: [
-                    { required: true, message: 'Name is required', trigger: 'blur' },
-                    {
-                        validator: (rule, value, callback) => {
-                            if (value && value.length < 4) {
-                                callback(new Error('Name must be at least 4 characters'));
-                            } else {
-                                callback();
-                            }
-                        },
-                        trigger: 'blur',
-                    },
-                ],
-                class: [
-                    { required: true, message: 'Class is required', trigger: 'blur' },
-                    {
-                        validator: (rule, value, callback) => {
-                            if (value && value.length < 4) {
-                                callback(new Error('Class must be at least 4 characters'));
-                            } else {
-                                callback();
-                            }
-                        },
-                        trigger: 'blur',
-                    },
-                ],
-                section: [
-                    { required: true, message: 'Section is required', trigger: 'blur' },
-                    {
-                        validator: (rule, value, callback) => {
-                            if (value && value.length < 4) {
-                                callback(new Error('Section must be at least 4 characters'));
-                            } else {
-                                callback();
-                            }
-                        },
-                        trigger: 'blur',
-                    },
-                ],
+                name: generateValidationRule('Name', 4),
+                class: generateValidationRule('Class', 4),
+                section: generateValidationRule('Section', 4),
                 email: [
                     { required: true, message: 'Email is required', trigger: 'blur' },
                     {
                         validator: (rule, value, callback) => {
-                            if (value && value.length < 4) {
-                                callback(new Error('Email must be at least 4 characters'));
+                            if (!value) {
+                                callback(new Error('Please enter an email address'));
                             } else {
-                                callback();
+                                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                if (!value.includes('@')) {
+                                    callback(new Error('Email address must contain "@" symbol'));
+                                } else if (!emailRegex.test(value)) {
+                                    callback(new Error('Please enter a valid email address'));
+                                } else if (value && value.length > 20) {
+                                    callback(new Error('Email must be lass than 10 characters'));
+                                } else {
+                                    callback();
+                                }
                             }
                         },
                         trigger: 'blur',
                     },
                 ],
-
             },
 
         };
