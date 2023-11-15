@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('class');
             $table->string('section');
-            $table->tinyInteger('email')->default('0');
+            $table->string('email', 255);
             $table->timestamps();
         });
     }
