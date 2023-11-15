@@ -34,8 +34,7 @@
         },
         methods: {
           goAddStudent(){
-              console.log('Button clicked');
-              this.$router.push('/add-student');
+              window.location.href = "/add-student";
           }
         },
         mounted() {

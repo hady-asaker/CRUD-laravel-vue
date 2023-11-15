@@ -38,6 +38,7 @@ class StudentController extends Controller
     }
     public function All_Students()
     {
-
+        $students = Student::all();
+        return view('student.view', compact('students'));
     }
 }

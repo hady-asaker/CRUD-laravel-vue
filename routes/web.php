@@ -26,6 +26,6 @@ Route::get('/example', function () {
     return view('example');
 });
 
-Route::get('/add-student', 'App\Http\Controllers\StudentController@create');
+Route::get('/add-student', 'App\Http\Controllers\StudentController@create')->name('add-student');
 Route::post('/save-student', 'App\Http\Controllers\StudentController@save');
 Route::get('/students', 'App\Http\Controllers\StudentController@All_Students');
