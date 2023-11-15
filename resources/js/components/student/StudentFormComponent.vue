@@ -58,6 +58,11 @@ export default {
     },
     methods: {
         saveForm(formName){
+            this.$refs[formName].validate( (valid) => {
+                if (valid){
+                    this.$store.dispatch(saveStudent, this.model);
+                }
+            });
         },
         goBack(){
             window.location.href = "/students";
