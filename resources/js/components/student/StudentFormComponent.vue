@@ -10,7 +10,7 @@
             </template>
 
             <div class="form-container">
-                <el-form :model="model" :rules="rules" ref="studentForm" class="full-form">
+                <el-form :model="model" :rules="rules" ref="studentForm" class="full-form" label-position="top">
 
                     <el-form-item label="Name" required prop="name" :rules="rules.name">
                         <el-input v-model="model.name" aria-placeholder="Student Name" size="large" @update:modelValue="validateName"></el-input>
@@ -81,7 +81,7 @@ export default {
 <style scoped>
 
 .full-height {
-    height: 70vh;
+    height: 85vh;
     display: flex;
     justify-content: center;
     align-items: center;
