@@ -7,7 +7,9 @@ import * as actions from './actions.js';
 
 const store = createStore({
     modules: {},
-    state: {},
+    state: {
+        tableData: [],
+    },
     mutations,
     actions,
     getters,

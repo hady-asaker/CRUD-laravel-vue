@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div id="vue-app">
-            <students-table-component :students="{{$students}}">
+            <students-table-component>
 
             </students-table-component>
         </div>

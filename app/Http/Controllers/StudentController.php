@@ -38,8 +38,13 @@ class StudentController extends Controller
     }
     public function All_Students()
     {
+        return view('student.view');
+    }
+
+    public function Fetch_All_Students()
+    {
         $students = Student::all();
-        return view('student.view', compact('students'));
+        return $students;
     }
 
     public function edit_student($id)

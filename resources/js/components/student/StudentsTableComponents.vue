@@ -23,7 +23,7 @@
     <div>
         <hr class="my-4" />
         <el-pagination
-            :total="students.length"
+            :total="tableData.length"
             :page-size="pageSize"
             layout="prev, pager, next"
             @current-change="handleCurrentChange"
@@ -33,9 +33,11 @@
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+
     export default {
+        name: 'student-table-component',
         props: {
-            students:  '',
         },
         data(){
             return {
@@ -54,18 +56,35 @@
             editStudent(index, student){
                 window.location.href = "/edit-student/"+student.id;
             },
+            fetchStudents(){
+                this.students = this.$store.dispatch('getStudents');
+            },
             removeStudent(index, id){
+              if (confirm("Are You Sure To Delete This Student ?")){
                 this.$store.dispatch('deleteStudent', { id: id });
+                this.fetchStudents();
+              }
             },
         },
         mounted() {
-            console.log(this.students);
+            console.log(this.tableData);
+            const loading = this.$loading({
+                lock: true,
+                text: 'Loading...',
+                spinner: 'el-icon-loading',
+                background: 'rgba(255, 255, 255, 0.85)',
+            });
+            this.$store.dispatch('getStudents').then(() => {
+                loading.close();
+                this.fetchStudents();
+                console.log(this.tableData);
+            });
         },
         computed: {
             filteredStudents() {
                 const start = (this.currentPage - 1) * this.pageSize;
                 const end = start + this.pageSize;
-                return this.students.filter(
+                return this.tableData.filter(
                     (student) =>
                         student.name.toLowerCase().includes(this.search.toLowerCase()) ||
                         student.section.toLowerCase().includes(this.search.toLowerCase()) ||
@@ -73,6 +92,9 @@
                         student.email.toLowerCase().includes(this.search.toLowerCase())
                 ).slice(start, end);
             },
+            ...mapGetters({
+                tableData: ['tableData']
+            }),
         },
     };
 

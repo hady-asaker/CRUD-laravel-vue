@@ -1,3 +1,4 @@
-export const someGetter = state => {
-    // your getter logic here
+export const tableData = (state) => {
+    return state.tableData;
 };
+

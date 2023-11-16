@@ -29,7 +29,9 @@ Route::get('/example', function () {
 Route::group(['namespace'=>'App\Http\Controllers'], function (){
     Route::get('/add-student', 'StudentController@create')->name('add-student');
     Route::post('/save-student', 'StudentController@save');
+
     Route::get('/students', 'StudentController@All_Students');
+    Route::post('/fetch-all-students', 'StudentController@Fetch_All_Students');
 
     Route::get('/edit-student/{id}', 'StudentController@edit_student');
     Route::get('/fetch-student-showById/{id}', 'StudentController@fetchStudentToEdit');

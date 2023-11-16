@@ -15,6 +15,16 @@ function hideLoader(){
     loader.close();
 }
 
+import { setTableData } from "./mutations.js";
+
+export const getStudents = ({ commit }, payload) => {
+    let url = `/fetch-all-students`;
+    axios.post(url, payload)
+        .then(res => {
+            commit('setTableData', res.data);  // Correct mutation name
+        });
+};
+
 export const saveStudent = ({ commit }, payload) => {
 
     let url = '/save-student';
@@ -92,7 +102,7 @@ export const deleteStudent = ({ commit }, payload) => {
             type: 'success',
         });
         // Redirect on success
-        window.location.href = '/students';
+        // window.location.href = '/students';
     }).catch(error => {
         console.error(error);
 
