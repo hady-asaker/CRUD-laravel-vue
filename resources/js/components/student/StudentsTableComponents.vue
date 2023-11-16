@@ -15,6 +15,7 @@
                     <el-input v-model="search" size="default" placeholder="Type to search" />
                 </template>
                 <template #default="scope">
+                    <el-button type="info" size="default" icon="el-icon-view" @click="showStudent(scope.$index, scope.row)">Show</el-button>
                     <el-button type="primary" size="default" @click="editStudent(scope.$index, scope.row)">Edit</el-button>
                     <el-button type="danger" size="default" @click="removeStudent(scope.$index, scope.row.id)">Remove</el-button>
                 </template>
@@ -65,6 +66,9 @@
                 this.fetchStudents();
               }
             },
+            showStudent(index, student){
+                window.location.href = "/show-student/"+student.id;
+            }
         },
         mounted() {
             console.log(this.tableData);

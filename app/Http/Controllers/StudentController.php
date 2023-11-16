@@ -90,4 +90,13 @@ class StudentController extends Controller
         ]);
 
     }
+
+    public function show_student($id)
+    {
+        $data = [
+            "scope" => "show",
+            "id" => $id,
+        ];
+        return view('student.form')->with($data);
+    }
 }

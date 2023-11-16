@@ -39,5 +39,7 @@ Route::group(['namespace'=>'App\Http\Controllers'], function (){
 
     Route::get('/delete-student/{id}', 'StudentController@delete_student');
 
+    Route::get('/show-student/{id}', 'StudentController@show_student');
+
 });
 

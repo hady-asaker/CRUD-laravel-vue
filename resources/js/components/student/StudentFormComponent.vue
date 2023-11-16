@@ -13,23 +13,23 @@
                 <el-form :model="model" :rules="rules" ref="studentForm" class="full-form" label-position="top">
 
                     <el-form-item label="Name" required prop="name" :rules="rules.name">
-                        <el-input v-model="model.name" aria-placeholder="Student Name" size="large" @update:modelValue="validateName"></el-input>
+                        <el-input v-model="model.name" :readonly="readOnlyFields" placeholder="Student Name" size="large" @update:modelValue="validateName"></el-input>
                     </el-form-item>
 
                     <el-form-item label="Class" required prop="class" :rules="rules.class">
-                        <el-input v-model="model.class" aria-placeholder="Student Class" size="large" @update:modelValue="validateClass"></el-input>
+                        <el-input v-model="model.class" :readonly="readOnlyFields" placeholder="Student Class" size="large" @update:modelValue="validateClass"></el-input>
                     </el-form-item>
 
                     <el-form-item label="Section" required prop="section" :rules="rules.section">
-                        <el-input v-model="model.section" aria-placeholder="Student Section" size="large" @update:modelValue="validateSection"></el-input>
+                        <el-input v-model="model.section" :readonly="readOnlyFields" placeholder="Student Section" size="large" @update:modelValue="validateSection"></el-input>
                     </el-form-item>
 
                     <el-form-item label="Email" required prop="email" :rules="rules.email">
-                        <el-input v-model="model.email" aria-placeholder="Student Email" size="large" @update:modelValue="validateEmail"></el-input>
+                        <el-input v-model="model.email" :readonly="readOnlyFields" placeholder="Student Email" size="large" @update:modelValue="validateEmail"></el-input>
                     </el-form-item>
 
                     <el-row>
-                        <el-form-item>
+                        <el-form-item v-show="!readOnlyFields">
                             <el-button type="success" @click="saveForm('studentForm')" size="large">Save Student</el-button>
                         </el-form-item>
                     </el-row>
@@ -42,7 +42,6 @@
 <script>
 let string;
 import ValidationMixin from './mixins/ValidationMixin';
-import { reactive } from 'vue';
 export default {
     name: "StudentFormComponent",
     props: {
@@ -82,15 +81,20 @@ export default {
             window.location.href = "/students";
         }
     },
+    computed: {
+      readOnlyFields(){
+          return (this.scope === 'show') ? true: false;
+      }
+    },
     mounted() {
         console.log("Vue Mounted");
         console.log(this.$store);
 
         switch (this.scope){
+            case 'show':
             case 'edit' :
                 axios.get(`/fetch-student-showById/${this.id}`).then(res => {
                     console.log(res.data.data);
-                    // this.model = reactive(res.data.data);
                     this.model = res.data.data;
                 });
                 break;
