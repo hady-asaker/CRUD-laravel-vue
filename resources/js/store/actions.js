@@ -45,3 +45,65 @@ export const saveStudent = ({ commit }, payload) => {
         hideLoader();
     });
 };
+
+export const updateStudent = ({ commit }, payload) => {
+
+    let url = `/update-student/${payload.id}`;
+    showLoader('Updating Student');
+
+    axios.put(url, payload.model).then(res => {
+
+        ElLoading.service().close();
+
+        ElNotification({
+            title: 'success',
+            message: res.data.message,
+            type: 'success',
+        });
+        // Redirect on success
+        window.location.href = '/students';
+    }).catch(error => {
+        console.error(error);
+
+        // Notify error
+        ElNotification({
+            title: 'Error',
+            message: 'An error occurred while saving the student',
+            type: 'error',
+        });
+        throw error;
+    }).finally(() => {
+        hideLoader();
+    });
+};
+
+export const deleteStudent = ({ commit }, payload) => {
+
+    let url = `/delete-student/${payload.id}`;
+    showLoader('Deleting Student');
+
+        axios.get(url, payload).then(res => {
+
+        ElLoading.service().close();
+
+        ElNotification({
+            title: 'success',
+            message: res.data.message,
+            type: 'success',
+        });
+        // Redirect on success
+        window.location.href = '/students';
+    }).catch(error => {
+        console.error(error);
+
+        // Notify error
+        ElNotification({
+            title: 'Error',
+            message: 'An error occurred while saving the student',
+            type: 'error',
+        });
+        throw error;
+    }).finally(() => {
+        hideLoader();
+    });
+};

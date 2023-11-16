@@ -41,4 +41,48 @@ class StudentController extends Controller
         $students = Student::all();
         return view('student.view', compact('students'));
     }
+
+    public function edit_student($id)
+    {
+        $data = [
+            "scope" => "edit",
+            "id" => $id,
+        ];
+        return view('student.form')->with($data);
+    }
+
+    public function fetchStudentToEdit($id)
+    {
+        $student = Student::find($id);
+        return response()->json([
+            'status' => 200,
+            'data' => $student
+        ]);
+    }
+    public function update_student(Request $request, $id)
+    {
+        $student = Student::find($id);
+        $student->name = $request->name;
+        $student->class = $request->class;
+        $student->section = $request->section;
+        $student->email = $request->email;
+        $student->update();
+
+        return response()->json([
+            'status' => 200,
+            'message'=> 'Student Updated Successfully .'
+        ]);
+    }
+
+    public function delete_student($id)
+    {
+        $student = Student::find($id);
+        $student->delete();
+
+        return response()->json([
+            'status' => 200,
+            'message'=> 'Student Deleted Successfully .'
+        ]);
+
+    }
 }

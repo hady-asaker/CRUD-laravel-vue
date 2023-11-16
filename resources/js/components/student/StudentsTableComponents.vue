@@ -15,8 +15,8 @@
                     <el-input v-model="search" size="default" placeholder="Type to search" />
                 </template>
                 <template #default="scope">
-                    <el-button type="primary" size="default" @click="editStudent(scope.row)">Edit</el-button>
-                    <el-button type="danger" size="default" @click="removeStudent(scope.row)">Remove</el-button>
+                    <el-button type="primary" size="default" @click="editStudent(scope.$index, scope.row)">Edit</el-button>
+                    <el-button type="danger" size="default" @click="removeStudent(scope.$index, scope.row.id)">Remove</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -51,11 +51,11 @@
             handleCurrentChange(val) {
                 this.currentPage = val;
             },
-            editStudent(student){
-              console.log(student);
+            editStudent(index, student){
+                window.location.href = "/edit-student/"+student.id;
             },
-            removeStudent(student){
-                console.log(student);
+            removeStudent(index, id){
+                this.$store.dispatch('deleteStudent', { id: id });
             },
         },
         mounted() {

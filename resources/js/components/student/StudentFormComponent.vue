@@ -42,10 +42,13 @@
 <script>
 let string;
 import ValidationMixin from './mixins/ValidationMixin';
+import { reactive } from 'vue';
 export default {
     name: "StudentFormComponent",
     props: {
         scope: string,
+        // currentStudent: '',
+        id: String,
     },
     data(){
         return{
@@ -62,7 +65,16 @@ export default {
         saveForm(formName){
             this.$refs[formName].validate( (valid) => {
                 if (valid){
-                    this.$store.dispatch('saveStudent', this.model);
+                    switch (this.scope){
+                        case 'create':
+                            this.$store.dispatch('saveStudent', this.model);
+                            break;
+                        case 'edit':
+                            this.$store.dispatch('updateStudent', { id:this.id, model:this.model });
+                            break;
+                        default:
+                            break;
+                    }
                 }
             });
         },
@@ -73,6 +85,19 @@ export default {
     mounted() {
         console.log("Vue Mounted");
         console.log(this.$store);
+
+        switch (this.scope){
+            case 'edit' :
+                axios.get(`/fetch-student-showById/${this.id}`).then(res => {
+                    console.log(res.data.data);
+                    // this.model = reactive(res.data.data);
+                    this.model = res.data.data;
+                });
+                break;
+            default :
+                break;
+        }
+
     },
     mixins: [ValidationMixin],
 }

@@ -26,6 +26,16 @@ Route::get('/example', function () {
     return view('example');
 });
 
-Route::get('/add-student', 'App\Http\Controllers\StudentController@create')->name('add-student');
-Route::post('/save-student', 'App\Http\Controllers\StudentController@save');
-Route::get('/students', 'App\Http\Controllers\StudentController@All_Students');
+Route::group(['namespace'=>'App\Http\Controllers'], function (){
+    Route::get('/add-student', 'StudentController@create')->name('add-student');
+    Route::post('/save-student', 'StudentController@save');
+    Route::get('/students', 'StudentController@All_Students');
+
+    Route::get('/edit-student/{id}', 'StudentController@edit_student');
+    Route::get('/fetch-student-showById/{id}', 'StudentController@fetchStudentToEdit');
+    Route::put('/update-student/{id}', 'StudentController@update_student');
+
+    Route::get('/delete-student/{id}', 'StudentController@delete_student');
+
+});
+
